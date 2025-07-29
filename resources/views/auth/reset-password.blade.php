@@ -1,21 +1,12 @@
 <x-layout> 
-    <h1 class="text-2xl font-bold text-center mt-8 mb-6">Register a new account</h1>
+    <h1 class="text-2xl font-bold text-center mt-8 mb-6">Reset your Password</h1>
 
     <div class="mx-auto max-w-md bg-white p-6 rounded-xl shadow-2xl">
 
-        <form action="{{ route('register') }}" method="POST" x-data="formSubmit" @submit.prevent="submit" class="space-y-4">
+        <form action="{{ route('password.update') }}" method="POST" class="space-y-4">
             @csrf
 
-            {{-- Username --}}
-            <div>
-                <label for="username" class="block font-medium text-gray-700 mb-1">Username</label>
-                <input type="text" name="username" id="username"
-                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-blue-400 @error('username') border-red-500 ring-red-500 @enderror" value="{{ old('username') }}">
-
-                @error('username')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}
-                @enderror
-            </div>
+            <input type="hidden" name="token" value="{{ $token }}">
 
             {{-- Email --}}
             <div>
@@ -42,16 +33,9 @@
                 <label for="password_confirmation" class="block font-medium text-gray-700 mb-1">Confirm Password</label>
                 <input type="password" name="password_confirmation" id="password_confirmation" class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
-
-            {{-- Subscribe Checkbox --}}
-            <div class="flex items-center space-x-2">
-                <input type="checkbox" name="subscribe" id="subscribe">
-                <label for="subscribe" class="text-gray-700">Subscribe to our Newsletter</label>
-            </div>
-
             {{-- Submit Button --}}
             <div class="text-center">
-                <button x-ref="btn" type="submit" class="btn">Register</button>
+                <button type="submit" class="btn">Reset Password</button>
             </div>
         </form>
     </div>
