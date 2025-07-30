@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ env('APP_NAME') }}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white-900 text-dark">
-    <header>
-        <nav class="bg-gray-800 text-white px-4 py-3 flex items-center justify-between">
+<body class="bg-white text-black pb-20">
+
+    {{-- Navigation Bar --}}
+    <header class="border-b border-gray-200 stick top-0 z-50 bg-white">
+        <nav class="flex items-center justify-between max-w-7xl mx-auto px-6 py-4 font-inter">
             <div class="text-lg font-semibold">
             <a href="{{ route('posts.index') }}">{{ env('APP_NAME', 'Navbar') }}</a>
             </div>
@@ -44,8 +48,8 @@
 
             @guest
                 <ul class="flex space-x-4">
-                <li><a href="{{ route ('posts.index') }}"
-                class="hover:text-gray-300">Home</a></li>
+                <li><a href="#about"
+                class="hover:text-gray-300">About</a></li>
                 <li><a href="{{ route ('login') }}" class="hover:text-gray-300">Login</a></li>
                 <li><a href="{{ route ('register') }}" class="hover:text-gray-300">Register</a></li>
             </ul>
@@ -57,6 +61,12 @@
     <main class="p-4">
         {{ $slot }}
     </main>
+
+    {{-- Footer --}}
+    <footer class=" inset-x-0 text-center text-xs text-white py-4 border-t border-gray-800 bg-black z-50">
+    <p>&copy; {{ date('Y') }} Flourish — Crafted for the literary mind ✒️</p>
+    </footer>
+
 
     <script>
         // Set form: x-data="formSubmit" @submit.prevent="submit" and button: x-ref="btn"
@@ -78,3 +88,4 @@
     </script>
 </body>
 </html>
+
