@@ -1,85 +1,64 @@
-<x-layout> 
-    <h1 class="title"> Hello {{ auth()->user()->username }}, you have {{ $posts ->total() }} posts</h1>
+<x-layout>
+    {{-- Heading --}}
+    <section class="mb-12 text-center">
+        <h1 class="font-serif text-5xl mb-2">Your Dashboard</h1>
+        <p class="accent text-base">Welcome back, <strong>{{ auth()->user()->username }}</strong>. You have {{ $posts->total() }} post{{ $posts->count() !== 1 ? 's' : '' }}.</p>
+    </section>
 
-    {{-- Create Post Form --}}
-    <div class=" card mb-4">
-        <h2 class="font-bold mb-4"> Create a new post </h2>
-        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+    {{-- New Post Form --}}
+    <section class="card mb-12">
+        <h2 class="font-serif text-2xl mb-6">Create a New Post</h2>
+        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        @csrf
 
-            {{-- Session Mesasges --}}
-            @if (session('success'))
-                <x-flashMsg msg="{{ session('success') }}" />
-            @elseif (session('delete'))
-                <x-flashMsg msg="{{ session('delete') }}" bg="bg-red-500"/>
-            @endif 
-
-            {{-- Post Title --}}
-            <div>
-                <label for="title" class="block font-medium text-gray-700 mb-1">Post Title</label>
-                <input type="title" name="title" id="title" class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('title') border-red-500 ring-red-500 @enderror" value="{{ old('title') }}">
-
-                @error('title')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}
-                @enderror
-            </div>
-
-            {{-- Post Body --}}
-            <div>
-                <label for="body" class="block font-medium text-gray-700 mb-1">Post body</label>
-
-                <textarea name="body" rows="6" class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 @error('body') border-red-500 ring-red-500 @enderror">{{ old('body') }}</textarea>
-
-                @error('body')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}
-                @enderror
-            </div>
-
-            {{-- Post Image --}}
-            <div class="mb-6">
-                <label for="image">Cover Photo</label>
-                <input type="file" name="image" id="image">
-
-                @error('image')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}
-                @enderror
-            </div>
-
-             {{-- Submit Button --}}
-            <div class="text-center mt-2">
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Create</button>
-            </div>
-
-        </form>
-    </div>
-
-        {{--User Posts --}}
-        <h2 class="font-bold mb-4">Your Latest Posts</h2>
-
-            <div class="grid grid-cols-2 gap-6">
-                @foreach ( $posts as $post )
-                    <x-postCard :post="$post">
-
-                        {{-- Update Post --}}
-                        <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 text-white px-2 py-1 text-xs rounded-md">Update</a>
-
-                        {{-- Delete Post --}}
-                        <form action="{{ route('posts.destroy',  $post) }} " method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
-                        </form>
-                   </x-postCard>
-                @endforeach
-            </div>
-            
+        <div>
+            <label for="title" class="block font-medium mb-1">Title</label>
+            <input type="text" name="title" id="title" class="w-full border border-gray-300 rounded-md p-2" value="{{ old('title') }}">
+            @error('title') <p class="accent text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
         <div>
-            {{ $posts->links() }}
+            <label for="body" class="block font-medium mb-1">Body</label>
+            <textarea name="body" id="body" rows="6" class="w-full border border-gray-300 rounded-md p-2">{{ old('body') }}</textarea>
+            @error('body') <p class="accent text-sm mt-1">{{ $message }}</p> @enderror
         </div>
 
+        <div>
+            <label for="image" class="block font-medium mb-1">Cover Image</label>
+            <input type="file" name="image" id="image">
+            @error('image') <p class="accent text-sm mt-1">{{ $message }}</p> @enderror
+        </div>
+
+        <button type="submit" class="btn-accent">Publish</button>
+        </form>
+    </section>
+
+    {{-- Post List --}}
+    <section>
+        <h2 class="font-serif text-2xl mb-6">Your Posts</h2>
+
+        <div class="space-y-8">
+        @foreach ($posts as $post)
+            <div class="border-b pb-6">
+            <h3 class="text-2xl font-serif">{{ $post->title }}</h3>
+            <p class="post-meta">{{ $post->created_at->toFormattedDateString() }}</p>
+            <p class="accent mb-2">{{ Str::limit($post->body, 100) }}</p>
+
+            <div class="flex gap-4 text-sm">
+                <a href="{{ route('posts.edit', $post) }}" class="text-blue-600 hover:underline">Edit</a>
+
+                <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="text-red-500 hover:underline">Delete</button>
+                </form>
+            </div>
+            </div>
+        @endforeach
+        </div>
+
+        <div class="mt-10">
+        {{ $posts->links() }}
+        </div>
+    </section>
 </x-layout>
-
-
-
