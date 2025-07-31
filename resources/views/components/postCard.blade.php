@@ -1,50 +1,51 @@
 @props(['post', 'full' => false])
 
-<div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition border border-gray-200 flex flex-col h-full">
+<div class="bg-white rounded-2xl shadow-xl border border-gray-200 flex flex-col h-full overflow-hidden transition hover:shadow-2xl">
 
     {{-- Cover Photo --}}
-    <div class="h-52 w-full overflow-hidden bg-gray-100">
+    <div class="h-52 w-full bg-gray-100 overflow-hidden">
         <img 
             src="{{ $post->image ? asset('storage/' . $post->image) : asset('storage/posts_images/default.jpg') }}" 
             alt="Cover Image"
-            class="w-full h-full object-cover transition duration-300 hover:scale-105"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 ease-in-out"
         >
     </div>
 
     {{-- Content --}}
-    <div class="p-5 flex flex-col flex-grow">
+    <div class="p-6 flex flex-col flex-grow space-y-3">
 
         {{-- Title --}}
-        <h2 class="text-xl font-semibold text-gray-900 mb-1 hover:text-blue-600 transition">
+        <h2 class="text-2xl font-serif font-semibold text-gray-900 hover:text-black transition leading-snug">
             {{ $post->title }}
         </h2>
 
         {{-- Author and Date --}}
-        <div class="text-sm text-gray-500 mb-3">
-            Posted {{ $post->created_at->diffForHumans() }} by
-            <a href="{{ route('posts.user', $post->user) }}" class="text-blue-600 font-medium hover:underline">
+        <div class="text-sm text-gray-500">
+            <span class="italic">
+                {{ $post->created_at->format('M d, Y') }}
+            </span>
+            &mdash;
+            <a href="{{ route('posts.user', $post->user) }}" class="text-black font-semibold hover:underline">
                 {{ $post->user->username }}
             </a>
         </div>
 
-        {{-- Body --}}
-        <div class="text-gray-700 text-sm flex-grow">
+        {{-- Body Preview --}}
+        <div class="text-sm text-gray-700 leading-relaxed flex-grow">
             @if ($full)
                 <p>{{ $post->body }}</p>
             @else
                 <p>
-                    {{ Str::words($post->body, 20) }}
-                    <a href="{{ route('posts.show', $post) }}" class="text-blue-500 hover:underline ml-1">
-                        Read More &rarr;
-                    </a>
+                    {{ Str::words($post->body, 28) }}
+                    <a href="{{ route('posts.show', $post) }}" class="read-more ml-1 text-blue-600 hover:text-blue-800 underline underline-offset-4">Read More →</a>
                 </p>
             @endif
         </div>
 
-        {{-- Slot Area (Edit/Delete) --}}
-        <div class="mt-4 flex justify-end gap-2">
+        {{-- Actions (Edit/Delete/etc.) --}}
+        <div class="pt-4 flex justify-end gap-3">
             {{ $slot }}
         </div>
-
+        
     </div>
 </div>

@@ -31,7 +31,7 @@ class WelcomeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome to Laravel 12',
+            subject: 'Your post was posted Flourish!',
         );
     }
 
@@ -52,8 +52,12 @@ class WelcomeMail extends Mailable
      */
     public function attachments(): array
     {
+        if ($this->post->image) {
         return [
             Attachment::fromStorageDisk('public', $this->post->image)
         ];
+    }
+    return[];
+
     }
 }
