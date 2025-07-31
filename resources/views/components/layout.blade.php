@@ -21,17 +21,17 @@
             </div>
 
             @auth
-                <div class="relative grid place-items-center" x-data="{ open: false }">
+                <div class="relative grid place-items-center round-btn" x-data="{ open: false }">
                 {{-- Dropdown Menu Button --}}
                 <button @click="open = !open"  type="button" class="round-btn"> 
-                    <img src="https://picsum.photos/200" alt="">
+                    <img src="https://picsum.photos/200" alt="" class="w-10 h-10 rounded-full object-cover">
                 </button>
 
                 {{-- Dropdown Menu --}}
                 <div 
                     x-show="open" @click.outside="open=false"
                     x-transition
-                    class="bg-white shadow-lg absolute top-12 right-0 rounded-lg overflow-hidden font-light text-black w-40"
+                    class="bg-white shadow-xl absolute top-full mt-2 right-0 rounded-lg overflow-hidden font-light text-black w-44 z-50 border border-gray-200"
                 >
                     <p class="px-4 py-2 text-sm font-semibold text-gray-800 username"> {{ auth()->user()->username }}</p>
                     <a href=" {{ route('dashboard') }}" class="block hover:bg-slate-100 px-4 py-2 text-sm">Dashboard</a>

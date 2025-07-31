@@ -32,6 +32,10 @@
     p {
         @apply text-base leading-relaxed;
     }
+
+    .card {
+        @apply bg-white border border-gray-200 rounded-xl shadow-md p-6;
+    }
 }
 
 @layer components {

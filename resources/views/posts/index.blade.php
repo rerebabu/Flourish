@@ -5,17 +5,18 @@
       <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 gap-6">
          
          {{-- Text Content --}}
-         <div class="w-full lg:w-1/2">
-         <h1 class="text-5xl lg:text-6xl font-serif leading-tight text-gray-900 mb-6">
-            Let your ideas<br>Flourish
+      <div class="w-full lg:w-1/2">
+         <h1 class="text-5xl lg:text-6xl font-serif leading-tight text-black mb-6">
+            Nurture your voice, and let your thoughts <span class="italic">Flourish</span>.
          </h1>
-         <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-            A place to write, reflect, and deepen your understanding. Flourish is where timeless thoughts meet timeless design.
+         <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+            A quiet space where words take root—where every thought you write helps something grow. At Flourish, your voice matters. It's not just expression, but a way to connect, create, and come home to yourself.
          </p>
-         <a href="{{ route ('register') }}" class="inline-block bg-black text-white text-sm px-6 py-3 rounded-full font-semibold hover:bg-gray-900 transition">
+         <a href="{{ route('register') }}" class="inline-block bg-black text-white text-sm px-6 py-3 rounded-full font-semibold hover:bg-gray-900 transition">
             Start writing
          </a>
-         </div>
+      </div>
+
 
          {{-- Illustration or Brand Graphic --}}
          <div class="hidden lg:block w-full lg:w-[55%] max-w-lg">
