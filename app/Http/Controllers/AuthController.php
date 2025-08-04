@@ -56,7 +56,7 @@ class AuthController extends Controller
         return back()->with('message', 'Verification link sent!');
     }
 
-    //Login User
+     //Login User
     public function login (Request $request){
         //Validate
         $fields = $request->validate([
