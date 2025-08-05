@@ -86,6 +86,44 @@
             @enderror
             </div>
 
+            {{-- Category Dropdown --}}
+            <div>
+                <label for="category_id" class="block mb-1 font-medium text-sm text-gray-700">Category</label>
+                <select name="category_id" id="category_id" class="w-full border-b border-gray-300 focus:outline-none focus:border-black text-base">
+                    <option value="">Select a category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('category_id')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            {{-- Tags Checkbox --}}
+            <div>
+                <label class="block mb-1 font-medium text-sm text-gray-700">Tags</label>
+                <div class="flex flex-wrap gap-2">
+                    @foreach($tags as $tag)
+                        <label class="flex items-center text-sm">
+                            <input 
+                                type="checkbox" 
+                                name="tags[]" 
+                                value="{{ $tag->id }}" 
+                                {{ (is_array(old('tags')) && in_array($tag->id, old('tags'))) ? 'checked' : '' }}
+                                class="mr-2"
+                            >
+                            {{ $tag->name }}
+                        </label>
+                    @endforeach
+                </div>
+                @error('tags')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
             {{-- Post Body --}}
             <div>
             <textarea 

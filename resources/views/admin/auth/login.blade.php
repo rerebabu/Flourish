@@ -1,12 +1,29 @@
-<x-layout>
+<!-- resources/views/admin/auth/login.blade.php -->
+<x-admin-layout>
+    <div class="max-w-md mx-auto mt-20">
+        <h2 class="text-2xl font-bold mb-6">Admin Login</h2>
 
-<form method="POST" action="{{ route('admin.login') }}">
-    @csrf
+        <form method="POST" action="{{ route('admin.login') }}">
+            @csrf
 
-    <input type="email" name="email" placeholder="Admin Email" required>
-    <input type="password" name="password" placeholder="Password" required>
+            <div class="mb-4">
+                <label>Email</label>
+                <input type="email" name="email" class="w-full border p-2" required>
+            </div>
 
-    <button type="submit">Login as Admin</button>
-</form>
+            <div class="mb-4">
+                <label>Password</label>
+                <input type="password" name="password" class="w-full border p-2" required>
+            </div>
 
-</x-layout>
+            <div class="mb-4">
+                <label>
+                    <input type="checkbox" name="remember">
+                    Remember me
+                </label>
+            </div>
+
+            <button type="submit" class="bg-black text-white px-4 py-2">Login</button>
+        </form>
+    </div>
+</x-admin-layout>

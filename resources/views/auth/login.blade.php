@@ -12,6 +12,18 @@
           <x-flashMsg msg="{{ session('status') }}" />
         @endif
 
+        {{-- 👇 Add this block above your login form --}}
+        <div class="mb-6 text-center">
+          <div class="flex justify-center gap-4">
+              <a href="{{ route('login') }}" class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">
+                  Login as User
+              </a>
+              <a href="{{ route('admin.login') }}" class="bg-gray-200 text-black px-4 py-2 rounded hover:bg-gray-300 transition">
+                  Login as Admin
+              </a>
+          </div>
+        </div>
+
         <form action="{{ route('login') }}" method="POST" class="space-y-4">
           @csrf
 
