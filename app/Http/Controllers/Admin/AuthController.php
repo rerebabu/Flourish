@@ -11,6 +11,7 @@ class AuthController extends Controller
     public function showLoginForm()
     {
         return view('admin.auth.login');
+
     }
 
     public function login(Request $request)
@@ -28,6 +29,7 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'Invalid credentials.',
         ]);
+
     }
 
     public function logout(Request $request)

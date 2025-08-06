@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +19,10 @@ class PostFactory extends Factory
     {
         return [
             'user_id' => 1,
+            'category_id' => Category::inRandomOrder()->first()->id,
             'title' => fake()->sentence(),
-            'body' => fake()->paragraph(20),
+            'body' => fake()->paragraph(),
+            'image' => null,    
         ];
     }
 }

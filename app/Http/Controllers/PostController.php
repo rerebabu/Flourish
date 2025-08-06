@@ -6,6 +6,8 @@ use App\Events\UserSubscribed;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeMail;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -39,7 +41,10 @@ class PostController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('posts.index', compact('categories', 'tags'));
     }
 
     /**
@@ -52,6 +57,8 @@ class PostController extends Controller implements HasMiddleware
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'tags' => 'array|exists:tags,id',
             'image' => 'nullable|file|max:3000|mimes:png,jpg,webp'
         ]);
 
@@ -65,8 +72,11 @@ class PostController extends Controller implements HasMiddleware
         $post = Auth::user()->posts()->create([
             'title' => $request->title,
             'body' => $request->body,
-            'image' => $path
+            'image' => $path,
+            'category_id' => $request->category_id,
         ]);
+
+        $post->tags()->attach($request->tags);
 
         //Send Email
         Mail::to(Auth::user())->send(new WelcomeMail(Auth::user(), $post));

@@ -11,6 +11,16 @@
         >
     </div>
 
+    {{-- Catgeory & Tags --}}
+    <p><strong>Category:</strong> {{ $post->category->name ?? 'Uncategorized' }}</p>
+
+    <p><strong>Tags:</strong>
+        @foreach($post->tags as $tag)
+            <span>#{{ $tag->name }}</span>
+        @endforeach
+    </p>
+
+
     {{-- Content --}}
     <div class="p-6 flex flex-col flex-grow space-y-3">
 
