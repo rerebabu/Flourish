@@ -33,8 +33,8 @@
                             </svg>
                         </button>
                         <div x-show="open" class="ml-4 space-y-1" x-cloak>
-                            <a href="#" class="block py-1 px-2 rounded hover:bg-gray-700">User Accounts</a>
-                            <a href="#" class="block py-1 px-2 rounded hover:bg-gray-700">Admin Accounts</a>
+                            <a href="{{ route('admin.users.index') }}" class="block py-1 px-2 rounded hover:bg-gray-700">User Accounts</a>
+                            <a href="{{ route('admin.users.index') }}" class="block py-1 px-2 rounded hover:bg-gray-700">Admin Accounts</a>
                         </div>
                     </div>
 
@@ -47,13 +47,13 @@
                             </svg>
                         </button>
                         <div x-show="open" class="ml-4 space-y-1" x-cloak>
-                            <a href="#" class="block py-1 px-2 rounded hover:bg-gray-700">All Posts</a>
-                            <a href="#" class="block py-1 px-2 rounded hover:bg-gray-700">Post Categories</a>
-                            <a href="#" class="block py-1 px-2 rounded hover:bg-gray-700">Post Tags</a>
+                            <a href="{{ route('admin.users.index') }}" class="block py-1 px-2 rounded hover:bg-gray-700">All Posts</a>
+                            <a href="{{ route('admin.categories.index') }}" class="block py-1 px-2 rounded hover:bg-gray-700">Post Categories</a>
+                            <a href="{{ route('admin.tags.index') }}" class="block py-1 px-2 rounded hover:bg-gray-700">Post Tags</a>
                         </div>
                     </div>
 
-                    <a href="#" class="block py-2 px-3 rounded hover:bg-gray-800">Settings</a>
+                    <a href="{{ route('admin.users.index') }}" class="block py-2 px-3 rounded hover:bg-gray-800">Settings</a>
                 </nav>
             </div>
             {{-- Logout Button --}}
@@ -74,7 +74,7 @@
             </div>
         </aside>
 
-    {{ $slot }}
-
+        {{ $slot }}
+    </div>
 </body>
 </html>

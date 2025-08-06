@@ -1,6 +1,7 @@
 <!-- resources/views/admin/auth/login.blade.php -->
-<x-admin-layout>
-    <div class="max-w-md mx-auto mt-20">
+ <x-layout>
+    
+  <div class="max-w-md mx-auto mt-20">
         <h2 class="text-2xl font-bold mb-6">Admin Login</h2>
 
         <form method="POST" action="{{ route('admin.login') }}">
@@ -26,4 +27,5 @@
             <button type="submit" class="bg-black text-white px-4 py-2">Login</button>
         </form>
     </div>
-</x-admin-layout>
+
+</x-layout> 

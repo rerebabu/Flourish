@@ -17,7 +17,7 @@
     <header class="border-b border-gray-200 stick top-0 z-50 bg-white">
         <nav class="flex items-center justify-between max-w-7xl mx-auto px-6 py-4 font-inter">
             <div class="text-lg font-semibold">
-            <a href="{{ route('posts.index') }}">{{ env('APP_NAME', 'Navbar') }}</a>
+            <a href="{{ route('posts.index') }}">Flourish</a>
             </div>
 
             @auth

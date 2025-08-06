@@ -1,7 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\AdminAuthController as AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
@@ -53,14 +58,19 @@ Route::middleware('guest')->group(function (){
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware('guest:admin')->group(function () {
+    
         Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
         Route::post('login', [AdminAuthController::class, 'login']);
-    });
-
-    Route::middleware('auth:admin')->group(function () {
+    
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
-    });
+
+        Route::resource('users', UserController::class);
+        Route::resource('admins', AdminUserController::class);
+        Route::resource('posts', PostController::class)->names('admin.posts');
+        Route::resource('categories', CategoryController::class);
+        Route::resource('tags', TagController::class);
+        Route::get('/settings', [AdminDashboardController::class, 'settings'])->name('settings');
+
 });
 
